@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>simple chat</title>
+  </head>
+  <body>
+    <input type="text" id="message" />
+    <input type="button" id="btn" value="send"/>
+    <ul id="messages"></ul>
+    <script>
+    (function(){
+
+      var ws = new WebSocket('ws://127.0.0.1:8888/')
+      var msg = document.getElementById('message')
+      var btn = document.getElementById('btn')
+
+      var messages = document.getElementById('messages')
+      btn.addEventListener('click', function () {
+        ws.send(msg.value);
+      })
+
+      ws.onmessage = function(event){
+        var div = document.createElement('li')
+        div.textContent = event.data
+        messages.appendChild(div)
+      };
+    })()
+    </script>
+  </body>
+</html>
