@@ -5,7 +5,9 @@ connections = []
 
 EM::WebSocket.start({ host: "127.0.0.1", port: "8888" }) do |ws_conn|
   ws_conn.onopen do
+    pp 'Websocket connection successful'
     connections << ws_conn
+
   end
 
   ws_conn.onmessage do |message|
